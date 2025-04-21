@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <script>
+        function addProduct() {
+            const productName = document.getElementById('productName').value;
+            const description = document.getElementById('description').value;
+
+            fetch('/api/addProduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productName: productName, description: description })
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error: ' + error));
+        }
+    </script>
+</head>
+<body>
+    <h2>Add New Product</h2>
+    <form>
+        Product Name: <input type="text" id="productName" name="productName"><br><br>
+        Description: <input type="text" id="description" name="description"><br><br>
+        <button type="button" onclick="addProduct()">Add Product</button>
+    </form>
+</body>
+</html>
